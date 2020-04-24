@@ -16,32 +16,32 @@ void Game::Init()
 {
     dir = Down;
     body.push_back(Hanbaoer);
-    if (!puke_buffer.loadFromFile("/Users/taodafen/Desktop/laobaBurger/sound/puke.wav"))
+    if (!puke_buffer.loadFromFile("./sound/puke.wav"))
         std::cout<<"err"<<std::endl;
     puke_sound.setBuffer(puke_buffer);
 
-    if (!buffer[Baba].loadFromFile("/Users/taodafen/Desktop/laobaBurger/sound/baba.wav"))
+    if (!buffer[Baba].loadFromFile("./sound/baba.wav"))
         std::cout<<"err"<<std::endl;
     food_sound[Baba].setBuffer(buffer[Baba]);
 
-    if (!buffer[Coudoufu].loadFromFile("/Users/taodafen/Desktop/laobaBurger/sound/coudoufu.wav"))
+    if (!buffer[Coudoufu].loadFromFile("./sound/coudoufu.wav"))
         std::cout<<"err"<<std::endl;
     food_sound[Coudoufu].setBuffer(buffer[Coudoufu]);
 
-    if (!buffer[Fulu].loadFromFile("/Users/taodafen/Desktop/laobaBurger/sound/fulu.wav"))
+    if (!buffer[Fulu].loadFromFile("./sound/fulu.wav"))
         std::cout<<"err"<<std::endl;
     food_sound[Fulu].setBuffer(buffer[Fulu]);
 
-    if (!buffer[Ningmeng].loadFromFile("/Users/taodafen/Desktop/laobaBurger/sound/ningmeng.wav"))
+    if (!buffer[Ningmeng].loadFromFile("./sound/ningmeng.wav"))
         std::cout<<"err"<<std::endl;
     food_sound[Ningmeng].setBuffer(buffer[Ningmeng]);
 
-    background.loadFromFile("/Users/taodafen/Desktop/laobaBurger/pic/white.png");
-    coudoufu_bg.loadFromFile("/Users/taodafen/Desktop/laobaBurger/pic/coudoufu.png");
-    ningmeng_bg.loadFromFile("/Users/taodafen/Desktop/laobaBurger/pic/ningmeng.png");
-    baba_bg.loadFromFile("/Users/taodafen/Desktop/laobaBurger/pic/baba.png");
-    fulu_bg.loadFromFile("/Users/taodafen/Desktop/laobaBurger/pic/fulu.png");
-    hanbaoer_bg.loadFromFile("/Users/taodafen/Desktop/laobaBurger/pic/hanbaoer.png");
+    background.loadFromFile("./pic/white.png");
+    coudoufu_bg.loadFromFile("./pic/coudoufu.png");
+    ningmeng_bg.loadFromFile("./pic/ningmeng.png");
+    baba_bg.loadFromFile("./pic/baba.png");
+    fulu_bg.loadFromFile("./pic/fulu.png");
+    hanbaoer_bg.loadFromFile("./pic/hanbaoer.png");
 
     sprite1.setTexture(background);
     sprite[Coudoufu].setTexture(coudoufu_bg);

@@ -2,7 +2,7 @@
 
 Menu::Menu(float width, float height)
 {
-   if(!font.loadFromFile("/Users/taodafen/Desktop/laobaBurger/font/youeryuan.ttf"))
+   if(!font.loadFromFile("./font/youeryuan.ttf"))
    {
        std::cout<<"cannot load font"<<std::endl;
        // handle err

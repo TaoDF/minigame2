@@ -6,7 +6,7 @@ int main()
 {
     Sound intro_sound;
     SoundBuffer intro_buffer;
-    if (!intro_buffer.loadFromFile("/Users/taodafen/Desktop/laobaBurger/sound/lao8burger.wav"))
+    if (!intro_buffer.loadFromFile("./sound/lao8burger.wav"))
         std::cout<<"err"<<std::endl;
     intro_sound.setBuffer(intro_buffer);
 
