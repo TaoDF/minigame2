@@ -4,7 +4,7 @@ using namespace sf;
 
 Game::Game()
 {
-    Init();
+
 }
 
 Game::~Game()
@@ -14,6 +14,9 @@ Game::~Game()
 
 void Game::Init()
 {
+    laoba.x = N/2-1;
+    laoba.y = M-1;
+
     dir = Down;
     body.push_back(Hanbaoer);
     if (!puke_buffer.loadFromFile("./sound/puke.wav"))
@@ -35,6 +38,7 @@ void Game::Init()
     if (!buffer[Ningmeng].loadFromFile("./sound/ningmeng.wav"))
         std::cout<<"err"<<std::endl;
     food_sound[Ningmeng].setBuffer(buffer[Ningmeng]);
+    
 
     background.loadFromFile("./pic/white.png");
     coudoufu_bg.loadFromFile("./pic/coudoufu.png");
@@ -42,8 +46,10 @@ void Game::Init()
     baba_bg.loadFromFile("./pic/baba.png");
     fulu_bg.loadFromFile("./pic/fulu.png");
     hanbaoer_bg.loadFromFile("./pic/hanbaoer.png");
+    laoba_bg.loadFromFile("./pic/lao8.png");
 
-    sprite1.setTexture(background);
+    sprite_bg.setTexture(background);
+    sprite_laoba.setTexture(laoba_bg);
     sprite[Coudoufu].setTexture(coudoufu_bg);
     sprite[Ningmeng].setTexture(ningmeng_bg);
     sprite[Baba].setTexture(baba_bg);
@@ -54,6 +60,11 @@ void Game::Init()
 
 void Game::start(sf::RenderWindow &window)
 {
+
+    if(body.size()==0)
+    {
+        body.push_back(Hanbaoer);
+    }
     srand(time(0));
 
     Clock clock;
@@ -101,9 +112,14 @@ void Game::start(sf::RenderWindow &window)
         {
             for(int j = 0; j<M; j++)
             {
-                sprite1.setPosition(i*SIZE,j*SIZE); 
-                window.draw(sprite1);
+                sprite_bg.setPosition(i*SIZE,j*SIZE); 
+                window.draw(sprite_bg);
             }
+        }
+
+        if(body.size()==0)
+        {
+            break;
         }
 
         for(int i=0;i<body.size();i++)
@@ -123,6 +139,9 @@ void Game::start(sf::RenderWindow &window)
 
         sprite[Fulu].setPosition(f[Fulu].x*SIZE,f[Fulu].y*SIZE);
         window.draw(sprite[Fulu]);
+
+        sprite_laoba.setPosition(laoba.x*SIZE,laoba.y*SIZE);
+        window.draw(sprite_laoba);
 
         window.display();
     }
@@ -154,12 +173,20 @@ void Game::Tick()
         }
     }
 
+    //hit mr. 8
+    if((s[0].x==laoba.x)&&(s[0].y==laoba.y))
+    {
+            puke_sound.play();
+            body.clear();
+    }
+
+
     //eat itself-------
     for(int i = 1;i<body.size();i++)
     {
         if(s[0].x==s[i].x && s[0].y == s[i].y)
         {
-            puke_sound.play();
+            //puke_sound.play();
         }
     }
 

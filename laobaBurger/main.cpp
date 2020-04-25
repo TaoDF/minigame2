@@ -12,6 +12,7 @@ int main()
 
 
     Game game;
+    game.Init();
     Menu menu(W,H);
     RenderWindow window(VideoMode(W,H),"lao8 Burger Shop");
     while(window.isOpen())

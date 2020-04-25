@@ -11,20 +11,20 @@ public:
     Game();
     ~Game();
 
+    void Init();
     void start(sf::RenderWindow &window);
 
 private:
 
     int dir;
-    void Init();
     void Tick();
 
     Sound food_sound[FOOD_SIZE];
     Sound puke_sound;
     SoundBuffer puke_buffer;
     SoundBuffer buffer[FOOD_SIZE];
-    Texture background, coudoufu_bg, ningmeng_bg, baba_bg, fulu_bg, hanbaoer_bg;
-    Sprite sprite1;
+    Texture background, coudoufu_bg, ningmeng_bg, baba_bg, fulu_bg, hanbaoer_bg, laoba_bg;
+    Sprite sprite_bg, sprite_laoba;
     Sprite sprite[FOOD_SIZE];
 
     std::vector<int> body;
@@ -34,11 +34,9 @@ private:
         int x,y;
     } s[100];
 
-    struct Food
+    struct Stuff
     {
         int x,y;
-    }f[FOOD_SIZE];
-
-
+    }f[FOOD_SIZE], laoba;
 
 };
