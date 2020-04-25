@@ -18,6 +18,7 @@ private:
 
     int dir;
     void Tick();
+    void pre_start(sf::RenderWindow &window);
 
     Sound food_sound[FOOD_SIZE];
     Sound puke_sound;
@@ -29,6 +30,8 @@ private:
     Sprite sprite[FOOD_SIZE];
 
     std::vector<int> body;
+    std::vector<int> answer;
+
 
     struct Snake
     {

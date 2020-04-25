@@ -14,6 +14,12 @@ Game::~Game()
 
 void Game::Init()
 {
+    for(int i = 0; i<FOOD_SIZE-1; i++)
+    {
+        answer.push_back(i);
+    }
+    std::random_shuffle (answer.begin(), answer.end());
+
     laoba.x = N/2-1;
     laoba.y = M-1;
 
@@ -64,7 +70,7 @@ void Game::Init()
 
 void Game::start(sf::RenderWindow &window)
 {
-
+    pre_start(window);
     if(body.size()==0)
     {
         body.push_back(Hanbaoer);
@@ -86,6 +92,7 @@ void Game::start(sf::RenderWindow &window)
     f[Fulu].x=rand()%N;
     f[Fulu].y=rand()%M;
 
+
     while(window.isOpen())
     {
         float time = clock.getElapsedTime().asSeconds();
@@ -105,7 +112,6 @@ void Game::start(sf::RenderWindow &window)
         if(Keyboard::isKeyPressed(Keyboard::Right)&&dir!=Left) dir=Right;
         if(Keyboard::isKeyPressed(Keyboard::Up)&&dir!=Down) dir=Up;
         if(Keyboard::isKeyPressed(Keyboard::Down)&&dir!=Up) dir=Down;
-
 
         if (timer>delay){timer = 0; Tick();}
 
@@ -180,6 +186,24 @@ void Game::Tick()
     //hit mr. 8
     if((s[0].x==laoba.x)&&(s[0].y==laoba.y))
     {
+        bool success = true;
+        if(body.size()!=answer.size()+1)
+        {
+            success=false;
+        }
+        else
+        {
+            for(int i = 0; i<answer.size(); i++)
+            {
+                if(body[i+1]!=answer[i])
+                {
+                    success = false;
+                }
+            }
+        }
+
+        if(success)
+        {
             puke_sound.play();
             body.clear();
 
@@ -202,6 +226,12 @@ void Game::Tick()
                 result_window.display();
             }
             puke_sound.stop();
+        }
+        else
+        {
+            body.clear();
+            body.push_back(Hanbaoer);
+        }
     }
 
 
@@ -217,4 +247,45 @@ void Game::Tick()
     //hit wall------
     if(s[0].x>N) s[0].x = 0; if(s[0].x<0) s[0].x = N;
     if(s[0].y>M) s[0].y = 0; if(s[0].y<0) s[0].y = M;
+}
+
+
+void Game::pre_start(sf::RenderWindow &window)
+{
+
+    while(window.isOpen())
+    {
+        Event e;
+        while(window.pollEvent(e))
+        {
+            if(e.type == Event::Closed)
+            {
+                window.close();
+            }
+        }
+
+        //draw------
+        window.clear();
+
+        for(int i=0; i<N; i++)
+        {
+            for(int j = 0; j<M; j++)
+            {
+                sprite_bg.setPosition(i*SIZE,j*SIZE); 
+                window.draw(sprite_bg);
+            }
+        }
+
+        window.display();
+
+        for(int i=0;i<answer.size();i++)
+        {
+            food_sound[answer[i]].play();
+            sleep(2);
+        }
+        break;
+
+    }
+
+
 }
