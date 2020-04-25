@@ -23,8 +23,9 @@ private:
     Sound puke_sound;
     SoundBuffer puke_buffer;
     SoundBuffer buffer[FOOD_SIZE];
-    Texture background, coudoufu_bg, ningmeng_bg, baba_bg, fulu_bg, hanbaoer_bg, laoba_bg;
-    Sprite sprite_bg, sprite_laoba;
+    Texture background, coudoufu_bg, ningmeng_bg, baba_bg, fulu_bg, 
+    hanbaoer_bg, laoba_bg, success_bg, fail_bg;
+    Sprite sprite_bg, sprite_laoba, sprite_success, sprite_fail;
     Sprite sprite[FOOD_SIZE];
 
     std::vector<int> body;

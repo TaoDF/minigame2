@@ -47,9 +47,13 @@ void Game::Init()
     fulu_bg.loadFromFile("./pic/fulu.png");
     hanbaoer_bg.loadFromFile("./pic/hanbaoer.png");
     laoba_bg.loadFromFile("./pic/lao8.png");
+    success_bg.loadFromFile("./pic/success_laoba.png");
+    fail_bg.loadFromFile("./pic/fail_laoba.png");
 
     sprite_bg.setTexture(background);
     sprite_laoba.setTexture(laoba_bg);
+    sprite_success.setTexture(success_bg);
+    sprite_fail.setTexture(fail_bg);        
     sprite[Coudoufu].setTexture(coudoufu_bg);
     sprite[Ningmeng].setTexture(ningmeng_bg);
     sprite[Baba].setTexture(baba_bg);
@@ -178,6 +182,26 @@ void Game::Tick()
     {
             puke_sound.play();
             body.clear();
+
+            RenderWindow result_window(VideoMode(W/2, H/4), "", Style::None);
+            while (result_window.isOpen())
+            {
+                Event event;
+                while (result_window.pollEvent(event))
+                {
+                    if(event.type == Event::KeyReleased)
+                    {if(event.key.code == Keyboard::Return) result_window.close();}
+
+                    if (event.type == Event::Closed)
+                        result_window.close();
+                }
+
+                sprite_success.setPosition(0,0); 
+                result_window.draw(sprite_success);
+        
+                result_window.display();
+            }
+            puke_sound.stop();
     }
 
 
