@@ -25,7 +25,6 @@ void Game::Init()
     laoba.y = M-1;
 
     dir = Down;
-    body.push_back(Hanbaoer);
     if (!puke_buffer.loadFromFile("./sound/puke.wav"))
         std::cout<<"err"<<std::endl;
     puke_sound.setBuffer(puke_buffer);
@@ -72,11 +71,9 @@ void Game::Init()
 
 void Game::start(sf::RenderWindow &window)
 {
+    body.clear();
+    body.push_back(Hanbaoer);
     pre_start(window);
-    if(body.size()==0)
-    {
-        body.push_back(Hanbaoer);
-    }
     srand(time(0));
 
     Clock clock;
