@@ -14,7 +14,8 @@ Game::~Game()
 
 void Game::Init()
 {
-    for(int i = 0; i<FOOD_SIZE-1; i++)
+    become_burger = false;
+    for(int i = 0; i<FOOD_SIZE-2; i++)
     {
         answer.push_back(i);
     }
@@ -55,17 +56,18 @@ void Game::Init()
     laoba_bg.loadFromFile("./pic/lao8.png");
     success_bg.loadFromFile("./pic/success_laoba.png");
     fail_bg.loadFromFile("./pic/fail_laoba.png");
+    real_burger_bg.loadFromFile("./pic/burger.png");
 
     sprite_bg.setTexture(background);
     sprite_laoba.setTexture(laoba_bg);
     sprite_success.setTexture(success_bg);
-    sprite_fail.setTexture(fail_bg);        
+    sprite_fail.setTexture(fail_bg);
+    sprite[Real_Burger].setTexture(real_burger_bg);
     sprite[Coudoufu].setTexture(coudoufu_bg);
     sprite[Ningmeng].setTexture(ningmeng_bg);
     sprite[Baba].setTexture(baba_bg);
     sprite[Fulu].setTexture(fulu_bg);
     sprite[Hanbaoer].setTexture(hanbaoer_bg);
-
 }
 
 void Game::start(sf::RenderWindow &window)
@@ -113,7 +115,11 @@ void Game::start(sf::RenderWindow &window)
         if(Keyboard::isKeyPressed(Keyboard::Up)&&dir!=Down) dir=Up;
         if(Keyboard::isKeyPressed(Keyboard::Down)&&dir!=Up) dir=Down;
 
-        if (timer>delay){timer = 0; Tick();}
+        if (timer>delay){
+            timer = 0; 
+            check_if_success(); 
+            Tick();
+        }
 
         //draw------
         window.clear();
@@ -186,22 +192,7 @@ void Game::Tick()
     //hit mr. 8
     if((s[0].x==laoba.x)&&(s[0].y==laoba.y))
     {
-        bool success = true;
-        if(body.size()!=answer.size()+1)
-        {
-            success=false;
-        }
-        else
-        {
-            for(int i = 0; i<answer.size(); i++)
-            {
-                if(body[i+1]!=answer[i])
-                {
-                    success = false;
-                }
-            }
-        }
-
+        bool success = check_if_success();
         if(success)
         {
             puke_sound.play();
@@ -287,5 +278,38 @@ void Game::pre_start(sf::RenderWindow &window)
 
     }
 
+}
 
+bool Game::check_if_success()
+{
+    if(become_burger)
+    {
+        return true;
+    }
+
+    bool rtn = true;
+    if(body.size()!=answer.size()+1)
+    {
+        rtn=false;
+    }
+    else
+    {
+        for(int i = 0; i<answer.size(); i++)
+        {
+            if(body[i+1]!=answer[i])
+            {
+                rtn = false;
+            }
+        }
+    }
+
+    if(rtn==true)
+    {
+        std::cout<<"become burger"<<std::endl;
+        body.clear();
+        body.push_back(Real_Burger);
+        become_burger=true;
+    }
+
+    return rtn;
 }
