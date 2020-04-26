@@ -14,7 +14,6 @@ Game::~Game()
 
 void Game::Init()
 {
-    become_burger = false;
     for(int i = 0; i<FOOD_SIZE-2; i++)
     {
         answer.push_back(i);
@@ -71,6 +70,7 @@ void Game::Init()
 
 void Game::start(sf::RenderWindow &window)
 {
+    become_burger = false;
     body.clear();
     body.push_back(Hanbaoer);
     pre_start(window);
@@ -302,7 +302,6 @@ bool Game::check_if_success()
 
     if(rtn==true)
     {
-        std::cout<<"become burger"<<std::endl;
         body.clear();
         body.push_back(Real_Burger);
         become_burger=true;
