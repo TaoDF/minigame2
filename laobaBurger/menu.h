@@ -1,5 +1,5 @@
-#include "./include/SFML/Graphics.hpp"
-#include "./include/SFML/Audio.hpp"
+#include "SFML/Graphics.hpp"
+#include "SFML/Audio.hpp"
 #include <time.h>
 #include <vector> 
 #include <unistd.h>
