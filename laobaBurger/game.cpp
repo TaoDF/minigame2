@@ -18,7 +18,6 @@ void Game::Init()
     {
         answer.push_back(i);
     }
-    std::random_shuffle (answer.begin(), answer.end());
 
     laoba.x = N/2-1;
     laoba.y = M-1;
@@ -70,6 +69,7 @@ void Game::Init()
 
 void Game::start(sf::RenderWindow &window)
 {
+    std::random_shuffle (answer.begin(), answer.end());
     become_burger = false;
     body.clear();
     body.push_back(Hanbaoer);
